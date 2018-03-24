@@ -1,0 +1,61 @@
+package crop;
+
+// handling command line arguments
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.JCommander;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+  @Parameter(names = {"--xPos", "-x"},
+             description = "x-coordinate to begin cropping from")
+    int xPos;
+  
+  @Parameter(names = {"--yPos", "-y"},
+             description = "y-coordinate to begin cropping from")
+    int yPos;
+
+  @Parameter(names = {"--width", "-w"},
+             description = "Width of the crop")
+    int width;
+
+  @Parameter(names = {"--height", "-h"},
+             description = "Height of the crop")
+    int height;
+
+  @Parameter(names = {"--path", "-p"},
+             description = "Filepath of images to crop")
+    String filepath;
+
+public static void main (String[] args) {
+    /*
+       if (args.length == 5) {
+       int x       = Integer.parseInt(args[0]),
+       y       = Integer.parseInt(args[1]),
+       width   = Integer.parseInt(args[2]),
+       height  = Integer.parseInt(args[3]);
+
+       String path = args[4];
+
+       Cropper crp = new Cropper(x, y, width, height);
+       crp.convert(path);
+       }
+       else {
+       System.out.println("Invalid number of arguments!");
+       }
+       */
+
+    Main main = new Main();
+    JCommander.newBuilder()
+      .addObject(main)
+      .build()
+      .parse(args);
+
+    main.run();
+  }
+
+  public void run() {
+    Cropper crp = new Cropper(xPos, yPos, width, height);
+    crp.convert(filepath);
+  }
+}

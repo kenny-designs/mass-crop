@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'crop.Main'
+
+repositories {
+  mavenCentral()
+}
+
+jar {
+  baseName = 'gs-gradle'
+  version =  '0.1.0'
+
+  manifest {
+    attributes 'Main' : 'crop.Main'
+  }
+}
+
+// Done like so:
+//  gradlew run1 -PappArgs="['arg1', 'arg2']"
+task run1 (type: JavaExec) {
+  main = 'crop.Main'
+  classpath = sourceSets.main.runtimeClasspath
+
+  if (project.hasProperty("appArgs")) {
+    args Eval.me(appArgs)
+  }
+}
+
+task runDefault (type: JavaExec) {
+  main = 'crop.Main'
+  classpath = sourceSets.main.runtimeClasspath
+
+  args = ['-w', '250', '-h', '200']
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+  // https://mvnrepository.com/artifact/com.beust/jcommander
+  compile group: 'com.beust', name: 'jcommander', version: '1.72'
+}
