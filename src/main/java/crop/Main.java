@@ -3,8 +3,6 @@ package crop;
 // handling command line arguments
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.JCommander;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Main {
   @Parameter(names = {"--xPos", "-x"},
@@ -37,6 +35,9 @@ public static void main (String[] args) {
     main.run();
   }
 
+  /**
+   * perform conversions
+   */ 
   public void run() {
     Cropper crp = new Cropper(xPos, yPos, width, height);
     crp.convert(filepath);

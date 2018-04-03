@@ -27,11 +27,20 @@ task run1 (type: JavaExec) {
   }
 }
 
-task runDefault (type: JavaExec) {
+// test writing background images
+task backgroundTest (type: JavaExec) {
   main = 'crop.Main'
   classpath = sourceSets.main.runtimeClasspath
 
-  args = ['-w', '250', '-h', '200']
+  args = ['-w', '945', '-h', '385', '-p', '.\\exampleImages\\backgrounds']
+}
+
+// test writing note images
+task noteTest (type: JavaExec) {
+  main = 'crop.Main'
+  classpath = sourceSets.main.runtimeClasspath
+
+  args = ['-w', '250', '-h', '200', '-p', '.\\exampleImages\\notes']
 }
 
 sourceCompatibility = 1.8
